@@ -14,8 +14,6 @@ speed = 0
 bottom = 0
 cut = 0
 
-delay(3)
-
 # --- 그리기 함수
 def about_draw ( num_f, num_l, speed, bottom, cut):
     frame = 0

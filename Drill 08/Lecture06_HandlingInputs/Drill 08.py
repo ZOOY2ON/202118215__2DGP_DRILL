@@ -44,16 +44,29 @@ def draw_obj(bottom):       # bottom : 이미지 하단까지 높이
     handle_events()
     frame = (frame + 1) % 8
 
-    if x > 50 & x < 750:
-        x += dir_x * 5
-    elif x<50 & x>750:
-        handle_events()
+    if x > 50:
+        if x < 750:
+            x += dir_x * 5
+    elif x == 50:
+        dir_x = 0
+        x = 100
+    elif x == 750:
+        dir_x = 0
+        x = 740
 
-    if y > 50 & y < 550:
-        y += dir_y * 5
-    elif y < 50 & y > 550:
-        handle_events()
+    if y > 50:
+        if y < 550:
+            y += dir_y * 5
+    elif y == 50:
+        dir_y = 0
+        y = 55
+    elif y == 550:
+        dir_y = 0
+        y = 545
 
+
+    print(x)
+    print(y)
     # x += dir_x * 5
     # y += dir_y * 5
 

@@ -13,10 +13,10 @@ random_num_slimex = 0
 # ---- 토끼 25마리 정도 잡으면 나올듯
 # 토끼발 : 50퍼
 # 토끼뼈 확률 : 20퍼
-# ---- 슬라임 100마리 정도 잡으면 나올듯
-# 슬라임 핵의 조각 : 50퍼
+# ---- 슬라임 40~50마리 정도 잡으면 나올듯
+# 슬라임 핵의 조각 : 75퍼
 
-while true < 100:
+while true < 40:
     stats_data.rabbit[0] = 0
     stats_data.slime[0] = 0
 
@@ -29,8 +29,12 @@ while true < 100:
             rabbitborn += 1
 
     if stats_data.slime[0] == 0:
-        random_num_slimex = randint(0, 2)
+        random_num_slimex = randint(0, 4)
         if random_num_slimex == 0:
+            slimex += 1
+        elif random_num_slimex == 1:
+            slimex += 1
+        elif random_num_slimex == 2:
             slimex += 1
 
     print('---------------------------------------------')

@@ -1,5 +1,5 @@
 from pico2d import *
-import move_player
+#import move_player
 
 # =========================== 변수 S
 running = True
@@ -74,7 +74,7 @@ elif stage == 3:
     tree = load_image('stage_3_tree.png')
 elif stage == 4:
     background = load_image('stage_4.png')
-character = load_image('player_all_sheet_02.png')
+character = load_image('rabbit_sheet.png')
 # =========================== 이미지 로딩 E
 
 # =========================== main S

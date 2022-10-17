@@ -5,6 +5,7 @@ rabbitfoot = 0
 rabbitborn = 0
 slimex = 0
 true = 0
+my_item = [0, 0, 0, 0] # 토끼발, 토끼뼈, 슬라임 핵의 조각, 포션(미정)
 
 random_num_rabbitfoot = 0
 random_num_rabbitborn = 0
@@ -37,15 +38,19 @@ while true < 40:
         elif random_num_slimex == 2:
             slimex += 1
 
+    my_item[0] = rabbitfoot
+    my_item[1] = rabbitborn
+    my_item[2] = slimex
+
     print('---------------------------------------------')
     print(random_num_rabbitfoot)
     print(random_num_rabbitborn)
     print(random_num_slimex)
     print('---------------------------------------------')
     print('========================')
-    print(rabbitfoot)
-    print(rabbitborn)
-    print(slimex)
+    print(my_item[0])
+    print(my_item[1])
+    print(my_item[2])
     print('========================')
 
     true += 1

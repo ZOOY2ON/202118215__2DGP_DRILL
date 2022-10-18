@@ -36,9 +36,9 @@ def handle_events():
                 running = False
             # 공격키
             if event.key == SDLK_q:
-                attack += 1
+                attack = 1
             elif event.key == SDLK_w:
-                attack -= 1
+                attack = 2
 
         # 키보드가 올라옴
         elif event.type == SDL_KEYUP:
@@ -50,41 +50,17 @@ def handle_events():
                 dir_y -= 1
             elif event.key == SDLK_DOWN:
                 dir_y += 1
-            if event.key == SDLK_q:
-                attack -= 1
-            elif event.key == SDLK_w:
-                attack += 1
 # =========================== 키보드 입력 E
 
 # =========================== 움직임 출력 S
 def draw_move(bottom, cut):
     global frame
     global x, y, dir_x, dir_y
-    global  way ; global attack
+    global  way
     global stage
 
     clear_canvas()
     background.draw(400, 300)
-
-    if attack == 1:
-        cut = 4
-        if way == 1:
-            bottom = 400
-        elif way == 2:
-            bottom = 500
-        elif way == 3:
-            bottom = 600
-        elif way == 4:
-            bottom = 700
-
-    elif attack == -1:
-        bottom = (way-1)*100
-        cut = 4
-
-    elif attack == 0:
-        return
-
-    attack = 0
 
     # === 정지 모션
     if bottom == 800:
@@ -97,6 +73,7 @@ def draw_move(bottom, cut):
         elif way == 4:
             frame = 0
         # === 정지 모션
+    draw_attack()
 
     character.clip_draw(frame * 100, bottom * 1, 100, 100, x, y)
     # 스테이지 3 맨 앞 오브젝트
@@ -108,14 +85,17 @@ def draw_move(bottom, cut):
     if bottom != 800:
         frame = (frame + 1) % cut
 
-    if x >= 60 and x <= 740:
+    print(bottom)
+    print(way)
+    if x >= 50 and x <= 750:
         x += dir_x*16
-    elif x <60:
+
+    if x <50:
         dir_x = 0
-        x = 65
-    elif x>740:
+        x = 55
+    if x>750:
         dir_x = 0
-        x = 735
+        x = 745
 
     if y >= 50 and y<=550:
         y += dir_y*16
@@ -127,42 +107,46 @@ def draw_move(bottom, cut):
         dir_y = 0
         y = 540
 
-    #attack = 0
+
+
     delay(0.1)
 # =========================== 움직임 출력 E
 
 # =========================== 공격 움직임 출력 S
 def draw_attack():
-    global bottom ; global cut
+    global frame ; global bottom ; global cut
+    global x, y, dir_x, dir_y
     global  way
     global attack
 
+    clear_canvas()
+    background.draw(400, 300)
+    cut = 4
+
     # === 공격 방향
     if attack == 1:
-        cut = 4
-        if way == 1:
-            bottom = 400
-        elif way == 2:
-            bottom = 500
-        elif way == 3:
-            bottom = 600
-        elif way == 4:
-            bottom = 700
+        bottom = (way+3)*100
 
-    elif attack == -1:
+    elif attack == 2:
         bottom = (way-1)*100
-        cut = 4
 
     elif attack == 0:
         return
-
-    attack = 0
-
-    print('bot_att : ', bottom)
-    print('cut_att : ', cut)
-    #print('bot_att : ', bottom)
-    #print('cut_att : ', cut)
         # === 공격 방향
+
+    character.clip_draw(frame * 100, bottom * 1, 100, 100, x, y)
+    update_canvas()
+
+    handle_events()
+
+    frame = (frame + 1) % 4
+
+    x += dir_x * 16
+    y += dir_y* 16
+
+    delay(0.1)
+    draw_move(800, 1)
+    print(way)
 # =========================== 공격 움직임 출력 E
 
 # =========================== 이미지 로딩 S
@@ -182,36 +166,24 @@ character = load_image('player_all_sheet_02.png')
 # =========================== main S
 while running:
     if dir_x == 1:
-        bottom = 900
-        cut = 2
-        draw_attack()
+        draw_move(900,2)
         way = 1 #오른쪽
     elif dir_x == -1:
-        bottom = 1000
-        cut = 2
-        draw_attack()
+        draw_move(1000,2)
         way = 2 # 왼쪽
     elif dir_y == 1:
-        bottom = 1100
-        cut = 2
-        draw_attack()
+        draw_move(1100,2)
         way = 3 # 위
     elif dir_y == -1:
-        bottom = 1200
-        cut = 2
-        draw_attack()
+        draw_move(1200,2)
         way = 4 # 아래
     elif dir_x == 0 or dir_y == 0:
-        bottom = 800
-        cut = 1
-        draw_attack()
-
-    draw_move(bottom, cut)
+        draw_move(800,1)
    # if attack == 1:
         #draw_move(400, 4)
     #if attack == 2:
         #draw_move((way-1)*100, 4)
+    draw_attack()
 
 close_canvas()
 # =========================== main E
-
